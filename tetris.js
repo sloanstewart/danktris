@@ -137,7 +137,7 @@ function playerReset() {
                     (player.matrix[0].length / 2 | 0);
     if (collide(arena, player)) {
         arena.forEach(row => row.fill(0));
-        // alert('game over, man! GAME OVER!');
+        alert('game over, man! GAME OVER!');
         player.score = 0;
         updateScore();
     }
@@ -198,8 +198,7 @@ function update(time = 0) {
     
     dropCounter += deltaTime;
     if (dropCounter > dropInterval) {
-        player.pos.y++;
-        dropCounter = 0;
+        playerDrop();
     }
     
     lastTime = time;
@@ -231,18 +230,16 @@ const player = {
     score: 0,
 }
 
-document.addEventListener('keyup', event => {
+document.addEventListener('keydown', event => {
    if (event.keyCode === 37) {
        playerMove(-1);
    } else if (event.keyCode === 39) {
        playerMove(1);
    } else if (event.keyCode === 40) {
        playerDrop();
-   } else if (event.keyCode === 81) {
+   } else if (event.keyCode === 38) {
        playerRotate(-1);
-   } else if (event.keyCode === 87) {
-    playerRotate(1);
-}
+   }
 });
 
 updateScore();
